@@ -147,13 +147,14 @@ for player in experiencedPlayers {
         teamRaptors.append(player)
     }
 }
-
+teamSharks.count
+players.count
 for player in inexperiencedPlayers {
-    if teamSharks.count < players.count/3 {
+    if teamSharks.count < (players.count/theLeague.count) {
         teamSharks.append(player)
-    } else if teamDragons.count < players.count/3 {
+    } else if teamDragons.count < players.count/theLeague.count {
         teamDragons.append(player)
-    } else if teamRaptors.count < players.count/3 {
+    } else if teamRaptors.count < players.count/theLeague.count {
         teamRaptors.append(player)
     }
 }
