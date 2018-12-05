@@ -11,15 +11,15 @@ import GameKit
 import AudioToolbox
 
 class ViewController: UIViewController {
-    
+
     // MARK: - Properties
     
     let questionsPerRound = 4
     var questionsAsked = 0
     var correctQuestions = 0
     var indexOfSelectedQuestion = 0
-    let QuizQuestions = Questions()
-    var gameSound: SystemSoundID = 0
+    let QuizQuestions = QuizManager()
+    var gameSound = Sound()
     
     
     // MARK: - Outlets
@@ -34,26 +34,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadGameStartSound()
-        playGameStartSound()
+        
+        gameSound.loadGameStartSound()
+        gameSound.playGameStartSound()
         displayQuestion()
     }
     
     // MARK: - Helpers
     
-    func loadGameStartSound() {
-        let path = Bundle.main.path(forResource: "GameSound", ofType: "wav")
-        let soundUrl = URL(fileURLWithPath: path!)
-        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &gameSound)
-    }
-    
-    func playGameStartSound() {
-        AudioServicesPlaySystemSound(gameSound)
-    }
+
     
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: QuizQuestions.list.count)
-        let questionDictionary = QuizQuestions.list[indexOfSelectedQuestion]
+        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: QuizQuestions.questionArray.count)
+        let questionDictionary = QuizQuestions.questionArray[indexOfSelectedQuestion]
         questionField.text = questionDictionary.question
         firstButton.setTitle(questionDictionary.optionA, for: UIControl.State.normal)
         secondButton.setTitle(questionDictionary.optionB, for: UIControl.State.normal)
@@ -104,7 +97,7 @@ class ViewController: UIViewController {
         // Increment the questions asked counter
         
         questionsAsked += 1
-        let selectedQuestionDict = QuizQuestions.list[indexOfSelectedQuestion]
+        let selectedQuestionDict = QuizQuestions.questionArray[indexOfSelectedQuestion]
         let correctAnswer = selectedQuestionDict.corrAnswer
         if sender.tag == correctAnswer {
             correctQuestions += 1
