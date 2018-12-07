@@ -7,53 +7,33 @@
 //
 
 import UIKit
-import GameKit
-import AudioToolbox
 
 class ViewController: UIViewController {
-
-    // MARK: - Properties
-    
-    let questionsPerRound = 4
-    var questionsAsked = 0
-    var correctQuestions = 0
-    var indexOfSelectedQuestion = 0
-    let QuizQuestions = QuizManager()
-    var gameSound = Sound()
-    
     
     // MARK: - Outlets
-    
     @IBOutlet weak var questionField: UILabel!
     @IBOutlet weak var firstButton: UIButton!
     @IBOutlet weak var secondButton: UIButton!
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var fourthButton: UIButton!
     @IBOutlet weak var playAgainButton: UIButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        gameSound.loadGameStartSound()
-        gameSound.playGameStartSound()
+        Sound.playGameSound()
         displayQuestion()
     }
     
     // MARK: - Helpers
-    
-
-    
     func displayQuestion() {
-        indexOfSelectedQuestion = GKRandomSource.sharedRandom().nextInt(upperBound: QuizQuestions.questionArray.count)
-        let questionDictionary = QuizQuestions.questionArray[indexOfSelectedQuestion]
-        questionField.text = questionDictionary.question
-        firstButton.setTitle(questionDictionary.optionA, for: UIControl.State.normal)
-        secondButton.setTitle(questionDictionary.optionB, for: UIControl.State.normal)
-        thirdButton.setTitle(questionDictionary.optionC, for: UIControl.State.normal)
-        fourthButton.setTitle(questionDictionary.optionD, for: UIControl.State.normal)
+        let question = QuizManager.provideRandomQuestion()
+        questionField.text = question.question
+        firstButton.setTitle(question.options[0], for: .normal)
+        secondButton.setTitle(question.options[1], for: .normal)
+        thirdButton.setTitle(question.options[2], for: .normal)
+        fourthButton.setTitle(question.options[3], for: .normal)
         playAgainButton.isHidden = true
-        
     }
     
     func displayScore() {
@@ -66,11 +46,11 @@ class ViewController: UIViewController {
         // Display play again button
         playAgainButton.isHidden = false
         
-        questionField.text = "Way to go!\nYou got \(correctQuestions) out of \(questionsPerRound) correct!"
+        questionField.text = "Way to go!\nYou got \(QuizManager.correctQuestions) out of \(QuizManager.questionsPerRound) correct!"
     }
     
     func nextRound() {
-        if questionsAsked == questionsPerRound {
+        if QuizManager.questionsAsked == QuizManager.questionsPerRound {
             // Game is over
             displayScore()
         } else {
@@ -92,21 +72,15 @@ class ViewController: UIViewController {
     }
     
     // MARK: - Actions
-    
     @IBAction func checkAnswer(_ sender: UIButton) {
-        // Increment the questions asked counter
-        
-        questionsAsked += 1
-        let selectedQuestionDict = QuizQuestions.questionArray[indexOfSelectedQuestion]
-        let correctAnswer = selectedQuestionDict.corrAnswer
-        if sender.tag == correctAnswer {
-            correctQuestions += 1
+        QuizManager.questionsAsked += 1
+        if sender.tag == QuizManager.provideCorrectAnswer() {
+            QuizManager.correctQuestions += 1
             questionField.text = "Correct!"
-        }else {
+        } else {
             questionField.text = "Sorry, wrong answer!"
         }
         loadNextRound(delay: 2)
-    
     }
     
     @IBAction func playAgain(_ sender: UIButton) {
@@ -116,12 +90,8 @@ class ViewController: UIViewController {
         thirdButton.isHidden = false
         fourthButton.isHidden = false
         
-        questionsAsked = 0
-        correctQuestions = 0
+        QuizManager.questionsAsked = 0
+        QuizManager.correctQuestions = 0
         nextRound()
     }
-    
-
 }
-
-

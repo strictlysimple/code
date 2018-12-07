@@ -63,9 +63,9 @@
 			isa = PBXGroup;
 			children = (
 				972A72B02056F06C0059EF4A /* AppDelegate.swift */,
+				972A72B22056F06C0059EF4A /* ViewController.swift */,
 				EAE9F62121B295B400480DDC /* QuizManager.swift */,
 				EAE9F62321B2A5F100480DDC /* Question.swift */,
-				972A72B22056F06C0059EF4A /* ViewController.swift */,
 				EA524EC421B815A300C4A577 /* Sound.swift */,
 				972A72B42056F06C0059EF4A /* Main.storyboard */,
 				972A72B72056F06C0059EF4A /* Assets.xcassets */,
@@ -296,10 +296,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R9E84DX62H;
+				DEVELOPMENT_TEAM = PT7L42U54T;
 				INFOPLIST_FILE = EnhanceQuizStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bojanmitreski;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -311,10 +311,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R9E84DX62H;
+				DEVELOPMENT_TEAM = PT7L42U54T;
 				INFOPLIST_FILE = EnhanceQuizStarter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.teamtreehouse.EnhanceQuizStarter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bojanmitreski;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
