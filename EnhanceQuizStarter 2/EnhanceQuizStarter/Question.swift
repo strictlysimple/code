@@ -8,8 +8,15 @@
 
 import Foundation
 
-struct Question {
-    let question: String
-    let options: [String]
-    let correctAnswer: Int
+class Question {
+    let question:String;
+    let options: [String];
+    let correctAnswer: Int;
+    
+    init(question:String, options: [String], correctAnswer: Int) {
+        
+        self.question = question;
+        self.options = options;
+        self.correctAnswer = correctAnswer;
+    }
 }

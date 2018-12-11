@@ -9,8 +9,8 @@
 import Foundation
 import GameKit
 
-struct QuizManager{
-    static let questionArray = [
+class QuizManager{
+     var questionArray = [
         Question(question: "This was the only US President to serve more than two consecutive terms.", options: ["George Washington", "Franklin D. Roosevelt", "Woodrow Wilson", "Andrew Jackson"], correctAnswer: 2),
         Question(question: "Which of the following countries has the most residents?", options: ["Nigeria", "Russia", "Iran", "Vietnam"], correctAnswer: 1),
         Question(question: "In what year was the United Nations founded?", options: ["1918", "1919", "1945", "1954"], correctAnswer: 3),
@@ -22,19 +22,16 @@ struct QuizManager{
     ]
 
     
-    static let questionsPerRound = 4
-    static var questionsAsked = 0
-    static var correctQuestions = 0
-    static var indexOfSelectedQuestion = 0
+    let questionsPerRound = 4
+    var questionsAsked = 0
+    var correctQuestions = 0
+    var indexOfSelectedQuestion = 0
     
-    static func provideRandomQuestion() -> Question {
-        let randomIndex = GKRandomSource.sharedRandom().nextInt(upperBound: questionArray.count)
-        
-        indexOfSelectedQuestion = randomIndex
-        return questionArray[randomIndex]
-    }
-    
-    static func provideCorrectAnswer() -> Int {
-        return questionArray[indexOfSelectedQuestion].correctAnswer
+    func provideRandomQuestion() -> Question {
+
+        return  questionArray.remove(
+            at: GKRandomSource.sharedRandom().nextInt(
+                upperBound: questionArray.count));
+         
     }
 }
